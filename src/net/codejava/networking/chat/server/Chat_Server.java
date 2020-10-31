@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+
 public class Chat_Server {
     private int port;
     private Set<String> userNames = new HashSet<>();
@@ -16,11 +17,10 @@ public class Chat_Server {
     public void execute() {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
 
-            System.out.println("Port: " + port);
+            System.out.println("Chat Server ist online auf folgendem Port: " + port);
 
             while (true) {
                 Socket socket = serverSocket.accept();
-                System.out.println("Neuer Benutzer ist gejoint");
 
                 UserThread newUser = new UserThread(socket, this);
                 userThreads.add(newUser);
@@ -28,16 +28,14 @@ public class Chat_Server {
 
             }
 
-        } catch (IOException ex) {
-            System.out.println("Server Error: " + ex.getMessage());
-            ex.printStackTrace();
+        } catch (IOException error) {
+            System.out.println("Error beim Server: " + error.getMessage());
+            error.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        if (args.length < 1) {
-            System.exit(0);
-        }
+
 
         int port = Integer.parseInt(args[0]);
 
@@ -45,20 +43,31 @@ public class Chat_Server {
         server.execute();
     }
 
-    //Nachricht versenden
+    //Gibt die Nachricht an den Benutzer weiter
+    void broadcast(String message, UserThread excludeUser) {
+        for (UserThread aUser : userThreads) {
+            if (aUser != excludeUser) {
+                aUser.sendMessage(message);
+            }
+        }
+    }
 
-
-    //fügt neue Benutzer hinzu
     void addUserName(String userName) {
         userNames.add(userName);
     }
 
-    //Wenn in User leaved
+    void removeUser(String userName, UserThread aUser) {
+        boolean removed = userNames.remove(userName);
+        if (removed) {
+            userThreads.remove(aUser);
+            System.out.println(userName + " ist nicht mehr da");
+        }
+    }
 
     Set<String> getUserNames() {
         return this.userNames;
     }
-
+    
     boolean hasUsers() {
         return !this.userNames.isEmpty();
     }
