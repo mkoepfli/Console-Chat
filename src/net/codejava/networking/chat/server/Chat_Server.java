@@ -14,6 +14,13 @@ public class Chat_Server {
         this.port = port;
     }
 
+    public static void main(String[] args) {
+        int port = 5464;
+
+        Chat_Server server = new Chat_Server(port);
+        server.execute();
+    }
+
     public void execute() {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
 
@@ -25,22 +32,12 @@ public class Chat_Server {
                 UserThread newUser = new UserThread(socket, this);
                 userThreads.add(newUser);
                 newUser.start();
-
             }
 
         } catch (IOException error) {
             System.out.println("Error beim Server: " + error.getMessage());
             error.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-
-
-        int port = Integer.parseInt(args[0]);
-
-        Chat_Server server = new Chat_Server(port);
-        server.execute();
     }
 
     //Gibt die Nachricht an den Benutzer weiter
@@ -67,7 +64,7 @@ public class Chat_Server {
     Set<String> getUserNames() {
         return this.userNames;
     }
-    
+
     boolean hasUsers() {
         return !this.userNames.isEmpty();
     }
