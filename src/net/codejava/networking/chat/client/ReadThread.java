@@ -26,7 +26,7 @@ public class ReadThread extends Thread {
                 System.out.println("\n" + response);
 
                 if (client.getUserName() != null) {
-                    System.out.print("|" + client.getUserName() + "|: ");
+                    System.out.print("[" + client.getUserName() + "]: ");
                 }
             } catch (IOException error) {
                 System.out.println("Error bei der Nachricht: " + error.getMessage());

@@ -13,6 +13,15 @@ public class ChatClient {
         this.port = port;
     }
 
+    public static void main(String[] args) {
+
+        String hostname = "localhost";
+        int port = 5464;
+
+        ChatClient client = new ChatClient(hostname, port);
+        client.execute();
+    }
+
     public void execute() {
         try {
             Socket socket = new Socket(hostname, port);
@@ -36,16 +45,5 @@ public class ChatClient {
 
     String getUserName() {
         return this.userName;
-    }
-
-
-    public static void main(String[] args) {
-        if (args.length < 2) return;
-
-        String hostname = args[0];
-        int port = Integer.parseInt(args[1]);
-
-        ChatClient client = new ChatClient(hostname, port);
-        client.execute();
     }
 }

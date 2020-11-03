@@ -3,6 +3,7 @@ package net.codejava.networking.chat.client;
 
 import java.io.*;
 import java.net.*;
+import java.util.Scanner;
 
 public class WriteThread extends Thread {
     private PrintWriter writer;
@@ -10,15 +11,27 @@ public class WriteThread extends Thread {
     private ChatClient client;
 
     public void run() {
-        Console console = System.console();
-        String userName = console.readLine("\nGib deinen Username ein: ");
+        //Console console = System.console();
+
+        Scanner myObj = new Scanner(System.in);
+        System.out.println("\nGib deinen Username ein: ");
+
+        String userName = myObj.nextLine();
+
+        // String userName = console.readLine("\nGib deinen Username ein: ");
         client.setUserName(userName);
         writer.println(userName);
 
         String text;
 
         do {
-            text = console.readLine("|" + userName + "|: ");
+            // text = console.readLine("|" + userName + "|: ");
+            // writer.println(text);
+
+            Scanner input = new Scanner(System.in);
+            System.out.println("[" + userName + "]:");
+
+            text = input.nextLine();
             writer.println(text);
 
         } while (!text.equals("Tschau"));
