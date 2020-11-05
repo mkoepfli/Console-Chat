@@ -13,6 +13,14 @@ public class ChatClient {
         this.port = port;
     }
 
+    public String getHostname() {
+        return hostname;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
     /**
      * Verbindet sich mit dem Server
      * @param args Kommandozeilenparameter
