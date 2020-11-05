@@ -13,6 +13,10 @@ public class ChatClient {
         this.port = port;
     }
 
+    /**
+     * Verbindet sich mit dem Server
+     * @param args Kommandozeilenparameter
+     */
     public static void main(String[] args) {
 
         String hostname = "localhost";
@@ -39,10 +43,16 @@ public class ChatClient {
 
     }
 
+    /**
+     * @param userName setzt den Username
+     */
     void setUserName(String userName) {
         this.userName = userName;
     }
 
+    /**
+     * @return gibt den Username zurück
+     */
     String getUserName() {
         return this.userName;
     }

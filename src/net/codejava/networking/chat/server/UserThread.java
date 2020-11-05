@@ -3,6 +3,10 @@ package net.codejava.networking.chat.server;
 import java.io.*;
 import java.net.*;
 
+/**
+ * Dieser Thread ist dazu da, die Verbindung von jedem Client zum Server zu erstellen
+ */
+
 public class UserThread extends Thread {
     private Socket socket;
     private Chat_Server server;
@@ -46,6 +50,10 @@ public class UserThread extends Thread {
         }
     }
 
+    /**
+     * Sendet die Nachricht
+     * @param message ist die Nachricht
+     */
     void sendMessage(String message) {
         writer.println(message);
     }

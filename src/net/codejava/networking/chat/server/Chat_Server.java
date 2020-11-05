@@ -4,6 +4,12 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+/**
+ * Console-Chat
+ * Um den Server zu verlasssen = "Tschau" schreiben
+ *
+ * @author Jermey Läderach, Marco Köpfli
+ */
 
 public class Chat_Server {
     private int port;
@@ -14,6 +20,10 @@ public class Chat_Server {
         this.port = port;
     }
 
+    /**
+     * Setzt den Server auf
+     * @param args Kommandozeilenparameter
+     */
     public static void main(String[] args) {
         int port = 5464;
 
@@ -40,7 +50,11 @@ public class Chat_Server {
         }
     }
 
-    //Gibt die Nachricht an den Benutzer weiter
+    /**
+     * Übermittelt die Nachricht vom Client an alle andere Clients
+     * @param message
+     * @param excludeUser
+     */
     void broadcast(String message, UserThread excludeUser) {
         for (UserThread aUser : userThreads) {
             if (aUser != excludeUser) {
@@ -49,10 +63,17 @@ public class Chat_Server {
         }
     }
 
+    /**
+     * @param userName Der Username von Client der joint
+     */
     void addUserName(String userName) {
         userNames.add(userName);
     }
 
+    /**
+     * Dies wird abgerufen wenn ein Client disconnected
+     * @param userName Nimmt den Username
+     */
     void removeUser(String userName, UserThread aUser) {
         boolean removed = userNames.remove(userName);
         if (removed) {
@@ -61,6 +82,9 @@ public class Chat_Server {
         }
     }
 
+    /**
+     * @return string Gibt die Usernames aus
+     */
     Set<String> getUserNames() {
         return this.userNames;
     }
