@@ -45,7 +45,7 @@ public class Chat_Server {
             }
 
         } catch (IOException error) {
-            System.out.println("Error beim Server: " + error.getMessage());
+           System.out.println("Error beim Server: " + error.getMessage());
             error.printStackTrace();
         }
     }

@@ -1,5 +1,7 @@
 package net.codejava.networking.chat.client;
 
+import net.codejava.networking.chat.exceptions.HostException;
+
 import java.net.*;
 import java.io.*;
 
@@ -44,7 +46,8 @@ public class ChatClient {
             new WriteThread(socket, this).start();
 
         } catch (UnknownHostException error) {
-            System.out.println("Server nicht gefunden: " + error.getMessage());
+            throw new HostException("Host Error: ", error);
+            //System.out.println("Server nicht gefunden: " + error.getMessage());
         } catch (IOException error) {
             System.out.println("Error: " + error.getMessage());
         }
